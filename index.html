@@ -11,64 +11,61 @@
 
 	<div class="widget">
 
-<!-- 		<div class="widget__progressbar">
-			<div class="timer__line"></div>
-			<div class="timer__body">
-				<div class="timer__counter">
-				</div>
+		<div class="widget__container">
+			<div class="widget__progressbar">
+
+				<svg class="widget-circle" viewBox="-3 -3 41 41">
+			    <g class="group2">
+			      <path
+			      id='path'
+			      d="M18 2.0845
+			      a 15.9155 15.9155 0 0 1 0 31.831
+			      a 15.9155 15.9155 0 0 1 0 -31.831"
+			      fill="none"
+			      stroke-width="2px"
+			      stroke-linecap='round'
+			      >
+			      </path>
+			    </g>
+			  </svg>
+
+			  <svg class="widget-circle" viewBox="-3 -3 41 41">
+			    <g class="group2">
+			      <path
+			      d="M18 2.0845
+			      a 15.9155 15.9155 0 0 1 0 31.831
+			      a 15.9155 15.9155 0 0 1 0 -31.831"
+			      fill="none"
+			      stroke-width="1px"
+			      stroke-linecap='round'
+			      >
+			      </path>
+			    </g>
+			  </svg>
+
+				<div class="timer__counter"></div>
+
 			</div>
-		</div> -->
 
-		<div class="widget__progressbar">
+			<div class="widget__content">
 
-			<svg class="widget-circle" viewBox="-3 -3 41 41">
-		    <g class="group2">
-		      <path
-		      id='path'
-		      d="M18 2.0845
-		      a 15.9155 15.9155 0 0 1 0 31.831
-		      a 15.9155 15.9155 0 0 1 0 -31.831"
-		      fill="none"
-		      stroke-width="2px"
-		      stroke-linecap='round'
-		      >
-		      </path>
-		    </g>
-		  </svg>
+				<button class="widget__checklist">Чеклист</button>
 
-		  <svg class="widget-circle" viewBox="-3 -3 41 41">
-		    <g class="group2">
-		      <path
-		      d="M18 2.0845
-		      a 15.9155 15.9155 0 0 1 0 31.831
-		      a 15.9155 15.9155 0 0 1 0 -31.831"
-		      fill="none"
-		      stroke-width="1px"
-		      stroke-linecap='round'
-		      >
-		      </path>
-		    </g>
-		  </svg>
+				<p class="widget__title">
+					Выполнено: 
+					<span class="widget__title__count"></span> 
+					из 
+					<span class="widget__title__total"></span> 
+					действий
+				</p>
 
-			<div class="timer__counter"></div>
+				<p class="widget__text"></p>
 
+			</div>			
 		</div>
 
-		<div class="widget__content">
 
-			<button class="widget__checklist">Чеклист</button>
 
-			<p class="widget__title">
-				Выполнено: 
-				<span class="widget__title__count"></span> 
-				из 
-				<span class="widget__title__total"></span> 
-				действий
-			</p>
-
-			<p class="widget__text"></p>
-
-		</div>
 
 		<div class="widget__button">Открыть чеклист</div>
 
