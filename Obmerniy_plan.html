@@ -34,23 +34,15 @@ if (table) {
 	const strokes = table.lastElementChild.querySelectorAll('tr')
 	if (strokes.length > 0) {
 		strokes.forEach( stroke => {
-			const first = stroke.firstElementChild.textContent
-			const last = stroke.lastElementChild.textContent
 			data.push({
-				length: +first,
-				corner: +last
+				length: +stroke.firstElementChild.textContent,
+				corner: +stroke.lastElementChild.textContent
 			})
 		})
 	}
 }
 
 console.log(data);
-
-const svgOptions = {
-	fill: 'none',
-	stroke: '#000',
-	width: '5px'
-}
 
 
 const transformData = data.filter( item => {
@@ -83,7 +75,7 @@ const transformData = data.filter( item => {
 		value = value - num
 		if ( value < 0) value = 0
 
-		Object.assign(item, { value: `H ${value} ` })
+		Object.assign(item, { value: `H ${Math.round(value)} ` })
 
 		return item
 	}
@@ -100,7 +92,7 @@ const transformData = data.filter( item => {
 		value = value - num
 		if ( value < 0) value = 0
 
-		Object.assign(item, { value: `V ${value} ` })
+		Object.assign(item, { value: `V ${Math.round(value)} ` })
 
 		return item
 	}
@@ -116,23 +108,19 @@ let lengthArr = []
 transformData.map( item => {
 	path = path + item.value
   lengthArr.push(item.transformedLength)
-  return lengthArr
 })
 
 
-const maxValue = lengthArr.reduce( (acc, i) => {
+const viewBox = lengthArr.reduce( (acc, i) => {
   if (i > acc) acc = i 
-  return acc
+  return Math.ceil(acc / 100 * 110)
 })
 
-const viewBox = Math.ceil(maxValue / 100 * 110)
-
-
-console.log(lengthArr)
-console.log(maxValue)	
-
-
-
+const svgOptions = {
+	fill: 'none',
+	stroke: '#000',
+	width: '5px'
+}
 
 const svg = `<svg viewBox="0 0 ${viewBox} ${viewBox}" xmlns="http://www.w3.org/2000/svg">
 						  <path
