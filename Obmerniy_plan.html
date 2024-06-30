@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> 
+	<title>Document</title>
+</head>
+
+<body class="px-5 d-inline-flex flex-column align-items-center" style="width: 100%">
+
+
+<table class="table bordered mx-auto mb-5">
+	<thead>
+		<tr><th>Длина</th> <th>Угол</th></tr>
+	</thead>
+	<tbody>
+		<tr> <td>1665</td><td>0</td> </tr>
+		<tr> <td>947</td><td>90</td> </tr>
+		<tr> <td>557</td><td>0</td> </tr>
+		<tr> <td>1300</td><td>90</td> </tr>
+		<tr> <td>2225</td><td>180</td> </tr>
+		<tr> <td>2239</td><td>270</td> </tr>		
+	</tbody>
+
+</table>
+
+<script>
+
+const table = document.querySelector('table')
+const data = []
+
+if (table) {
+	const strokes = table.lastElementChild.querySelectorAll('tr')
+	if (strokes.length > 0) {
+		strokes.forEach( stroke => {
+			const first = stroke.firstElementChild.textContent
+			const last = stroke.lastElementChild.textContent
+			data.push({
+				length: +first,
+				corner: +last
+			})
+		})
+	}
+}
+
+console.log(data);
+
+const svgOptions = {
+	fill: 'none',
+	stroke: '#000',
+	width: '5px'
+}
+
+
+const transformData = data.filter( item => {
+
+	let value = Math.round(item.length / 10)
+
+	Object.assign(item, { transformedLength: value })
+
+	if (item.corner === 0) {
+		Object.assign(item, { value: `H ${Math.round(value)} ` })
+
+		return item
+	}
+
+	if (item.corner === 90) {
+		Object.assign(item, { value: `V ${Math.round(value)} ` })
+
+		return item
+	}
+
+	if (item.corner === 180) {
+		let num = 0
+		const v = data.map( item => {
+			if (item.corner === 0) {
+				num = Math.round(num + item.length / 10)
+			}
+			return num
+		})
+
+		value = value - num
+		if ( value < 0) value = 0
+
+		Object.assign(item, { value: `H ${value} ` })
+
+		return item
+	}
+
+	if (item.corner === 270) {
+		let num = 0
+		const v = data.map( item => {
+			if (item.corner === 90) {
+				 num = Math.round(num + item.length / 10)
+			}
+			return num
+		})
+
+		value = value - num
+		if ( value < 0) value = 0
+
+		Object.assign(item, { value: `V ${value} ` })
+
+		return item
+	}
+
+})
+
+console.log(transformData)
+
+let path = 'M 0,0 '
+let lengthArr = []
+
+
+transformData.map( item => {
+	path = path + item.value
+  lengthArr.push(item.transformedLength)
+  return lengthArr
+})
+
+
+const maxValue = lengthArr.reduce( (acc, i) => {
+  if (i > acc) acc = i 
+  return acc
+})
+
+const viewBox = Math.ceil(maxValue / 100 * 110)
+
+
+console.log(lengthArr)
+console.log(maxValue)	
+
+
+
+
+const svg = `<svg viewBox="0 0 ${viewBox} ${viewBox}" xmlns="http://www.w3.org/2000/svg">
+						  <path
+						    fill="${svgOptions.fill}"
+						    stroke="${svgOptions.stroke}"
+						    stroke-width="${svgOptions.width}"
+						    d="${path}" />
+						  </svg>`
+
+document.body.insertAdjacentHTML('beforeend', svg)
+
+
+
+</script>
+
+</body>
+</html>
