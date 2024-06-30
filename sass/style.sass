@@ -1,3 +1,9 @@
+$white: rgba(255, 255, 255, 1)
+$grey: rgba(255, 255, 255, 0.5)
+$deepblue: rgba(35, 100, 219, 1)
+$lightblue: rgba(71, 119, 237, 1)
+$font-inter: "Inter", sans-serif
+
 @mixin centered 
 	display: flex
 	align-items: center
@@ -7,17 +13,6 @@
 	position: absolute
 	top: 0
 	left: 0
-
-@mixin pseudo-position
-	content: ''
-	@include absolute
-
-
-$white: rgba(255, 255, 255, 1)
-$grey: rgba(255, 255, 255, 0.5)
-$deepblue: rgba(35, 100, 219, 1)
-$lightblue: rgba(71, 119, 237, 1)
-$font-inter: "Inter", sans-serif
 
 .widget 
 	width: 743px
@@ -35,9 +30,7 @@ $font-inter: "Inter", sans-serif
 	justify-content: space-between
 
 	.widget__container
-		display: flex
-		align-items: center
-		justify-content: center
+		@include centered
 		flex-wrap: nowrap
 
 		.widget__progressbar
@@ -80,12 +73,12 @@ $font-inter: "Inter", sans-serif
 
 				span 
 					height: 60px
-					display: flex
-					align-items: center
-					justify-content: center
+					
 					font-size: 20px
 					font-weight: 400
 					line-height: 30px
+
+					@include centered
 
 
 		.widget__content 
